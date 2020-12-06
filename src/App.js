@@ -1,10 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-function App() {
+import Callback from './Callback'
+import Home from './Home'
+
+function App(props) {
+
   return (
-    <div className="App">
-      
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+
+        <Route path="/callback">
+          <Callback></Callback>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
