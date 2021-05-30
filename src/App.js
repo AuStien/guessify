@@ -14,7 +14,7 @@ function App(props) {
         </Route>
 
         <Route path="/callback">
-          <Callback></Callback>
+          <Callback/>
         </Route>
       </Switch>
     </Router>
