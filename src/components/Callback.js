@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useEffect, useContext } from 'react'
 import queryString from 'query-string'
-import { useLocation } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom'
 
-import { Redirect } from 'react-router-dom'
+import { Context } from '../Store'
 
 export default function Callback(props) {
+  const [state, dispatch] = useContext(Context)
   const location = useLocation()
   const [jsx, setJsx] = useState(<div>Loading...</div>)
 
@@ -23,6 +23,9 @@ export default function Callback(props) {
     .then(response => response.json())
     .then(data => {
       console.log(data)
+      dispatch({type: "SET_LOGGEDIN", payload: true})
+      dispatch({type: "SET_ACCESSTOKEN", payload: data.accessToken})
+      
       setJsx(<Redirect to={{
         pathname: '/',
         state: {data}
@@ -33,8 +36,8 @@ export default function Callback(props) {
   
   
   return(
-      <div>
+      <React.Fragment>
           {jsx}
-      </div>
+      </React.Fragment>
   )
 }
