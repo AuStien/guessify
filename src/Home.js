@@ -8,5 +8,5 @@ export default function Home(props) {
         console.log(location.state)
     }, [location.state])
 
-    return(<a href='http://localhost:5000/login?redirect=http://localhost:3000/callback'>Login</a>)
+    return(<a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>)
 }

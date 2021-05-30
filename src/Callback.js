@@ -10,7 +10,7 @@ export default function Callback(props) {
   const [jsx, setJsx] = useState(<div>Special thanks to HeinrichJunge11 the love of my life</div>)
 
   useEffect(() => {
-    fetch('http://localhost:5000/callback', {
+    fetch('https://paastien.no/gettify/callback', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
