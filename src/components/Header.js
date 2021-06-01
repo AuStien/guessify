@@ -1,36 +1,40 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
+
 import { Context } from '../Store'
+import { useFetch } from './hooks/useFetch'
 
 export default function Header() {
     const [state, dispatch] = useContext(Context)
     const [username, setUsername] = useState("")
+    const [cookies, setCookie, removeCookie] = useCookies(["refresh-token"])
+    const f = useFetch()
 
     useEffect(() => {
-        if(state.accessToken !== "") {
-            fetch("https://paastien.no/gettify/user", {
-                method: "GET",
-                headers: {
-                    "access-token": state.accessToken
-                }
-            })
-            .then(response => response.json())
+        if (cookies["refresh-token"] && cookies["refresh-token"] !== "undefined") {
+            f("refresh")
+        }
+    }, [])
+
+    useEffect(() => {
+        if(state.accessToken.token !== "") {
+            f("user")
             .then(data => {
-                console.log(data)
                 setUsername(data.display_name)
             })
         }
-    }, [state.accessToken])
+    }, [state.accessToken.token])
 
     function logout() {
-        dispatch({type: "SET_LOGGEDIN", payload: false})
-        dispatch({type: "SET_ACCESSTOKEN", payload: ""})
+        dispatch({type: "LOGOUT"})
         setUsername("")
+        removeCookie("refresh-token")
     }
 
     return(
         <React.Fragment>
-            <p>Accesstoken: {state.accessToken}</p>
-            {state.loggedIn ? <h1>Greetings, {username}! <span onClick={() => logout()}>Logout</span></h1> : <a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>}
+            {state.loggedIn ? <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3> : <a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>}
+            <button onClick={() => f("base")}>Base</button>
         </React.Fragment>
     )
 }

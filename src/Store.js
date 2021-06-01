@@ -3,16 +3,20 @@ import React, { createContext, useReducer } from 'react'
 //Initial state
 const initialState = {
     loggedIn: false,
-    accessToken: ""
+    accessToken: {token: "", expires: ""}
 }
 
 //Reducer
 export function Reducer(state, action) {
     switch(action.type) {
         case "SET_LOGGEDIN":
-            return { ...state, loggedIn: action.payload}
+            return { ...state, loggedIn: action.payload }
         case "SET_ACCESSTOKEN":
-            return { ...state, accessToken: action.payload}
+            return { ...state, accessToken: action.payload }
+        case "LOGIN":
+            return { ...state, accessToken: action.payload, loggedIn: true }
+        case "LOGOUT":
+            return { ...state, accessToken: {token: "", expires: ""}, loggedIn: false }
     }
 }
 
