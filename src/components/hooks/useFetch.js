@@ -22,6 +22,8 @@ export function useFetch() {
                 return refresh(cookies, setCookie, dispatch)
             case "user":
                 return user(state)
+            case "playlists":
+                return playlists(state)
             case "base":
                 return base(state)
         }
@@ -59,6 +61,20 @@ async function user(state) {
             .then(response => response.json())
             .then(data => res(data))
             .catch(e => rej(e))
+    })
+}
+
+async function playlists(state) {
+    return new Promise((res, rej) => {
+        fetch('https://paastien.no/gettify/playlist', {
+            method: 'GET',
+            headers: {
+                'access-token': state.accessToken.token
+            }
+        })
+        .then(response => response.json())
+        .then(data => res(data))
+        .catch(e => rej(e))
     })
 }
 
