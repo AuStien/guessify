@@ -19,7 +19,7 @@ export function useFetch() {
             case "callback":
                 return callback(payload.code, payload.redirectUri, dispatch, setCookie)
             case "refresh":
-                return refresh(cookies, setCookie, dispatch)
+                return refresh(cookies, setCookie, removeCookie, dispatch)
             case "user":
                 return user(state)
             case "playlists":
@@ -101,8 +101,8 @@ async function callback(code, redirectUri, dispatch, setCookie) {
     })
 }
 
-async function refresh(cookies, setCookie, dispatch) {
-    return new Promise(res => {
+async function refresh(cookies, setCookie, removeCookie, dispatch) {
+    return new Promise((res, rej) => {
         fetch("https://paastien.no/gettify/refresh", {
             method: "POST",
             headers: {
@@ -120,6 +120,11 @@ async function refresh(cookies, setCookie, dispatch) {
             }
             dispatch({type: "LOGIN", payload: {token: data.accessToken, expires: data.expires}})
             res(data)
+        })
+        .catch(e => {
+            dispatch({type: "LOGOUT"})
+            removeCookie("refresh-token")
+            rej(e)
         })
     })
 }
