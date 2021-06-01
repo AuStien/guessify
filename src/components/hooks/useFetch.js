@@ -24,6 +24,8 @@ export function useFetch() {
                 return user(state)
             case "playlists":
                 return playlists(state)
+            case "devices":
+                return devices(state)
             case "base":
                 return base(state)
         }
@@ -78,6 +80,20 @@ async function playlists(state) {
     })
 }
 
+async function devices(state) {
+    return new Promise((res, rej) => {
+        fetch('https://paastien.no/gettify/devices', {
+            method: 'GET',
+            headers: {
+                'access-token': state.accessToken.token
+            }
+        })
+        .then(response => response.json())
+        .then(data => res(data))
+        .catch(e => rej(e))
+    })
+}
+
 async function callback(code, redirectUri, dispatch, setCookie) {
     return new Promise((res, rej) => {
         fetch('https://paastien.no/gettify/callback', {
@@ -96,6 +112,7 @@ async function callback(code, redirectUri, dispatch, setCookie) {
             dispatch({type: "SET_LOGGEDIN", payload: true})
             dispatch({type: "SET_ACCESSTOKEN", payload: {token: data.accessToken, expires: data.expires}})
             setCookie("refresh-token", data.refreshToken, {maxAge: 365 * 24 * 60 * 60})
+            res(data)
         })
         .catch(e => rej(e))
     })
@@ -134,6 +151,7 @@ async function base(state) {
         fetch("https://paastien.no/gettify/")
         .then(resp => {
             console.log("Got base", state.loggedIn) //DEVELOPMENT
+            res(resp)
         })
     })
 }
