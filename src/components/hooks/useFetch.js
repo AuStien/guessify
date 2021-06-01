@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie'
 import { Context } from '../../Store'
 
 export function useFetch() {
-    const [cookies, setCookie] = useCookies(["refresh-token"])
+    const [cookies, setCookie, removeCookie] = useCookies(["refresh-token"])
     const [state, dispatch] = useContext(Context)
 
     async function f(type, payload) {
