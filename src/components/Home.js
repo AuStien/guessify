@@ -1,5 +1,18 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
-export default function Home(props) {
-    return(<p>Home</p>)
+import { Context } from '../Store'
+import { Devices } from './index'
+
+export default function Home() {
+    const [state, dispatch] = useContext(Context)
+    
+    
+    
+    return(
+        <React.Fragment>
+            {state.loggedIn &&
+            <Devices />
+            }
+        </React.Fragment>
+    )
 }
