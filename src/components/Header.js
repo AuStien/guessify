@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie'
 
 import { Context } from '../Store'
 import { useFetch } from './hooks/useFetch'
+import style from './header.module.css'
 
 export default function Header() {
     const [state, dispatch] = useContext(Context)

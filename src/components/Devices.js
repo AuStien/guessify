@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Select from 'react-select'
 
 import { Context } from '../Store'
+import style from './devices.module.css'
 
 export default function Devices() {
     const [state, dispatch] = useContext(Context)
@@ -15,6 +16,7 @@ export default function Devices() {
     }, [state.devices])
 
     return <Select 
+        className={style.select}
         options={options}
         value={selected}
         onChange={setSelected}
