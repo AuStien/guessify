@@ -4,8 +4,8 @@ import React, { createContext, useReducer } from 'react'
 const initialState = {
     loggedIn: false,
     accessToken: {token: "", expires: ""},
-    devices: [],
-    playlists: []
+    devices: {selected: {}, list: []},
+    playlists: {selected: {}, list: []}
 }
 
 //Reducer
@@ -20,9 +20,13 @@ export function Reducer(state, action) {
         case "LOGOUT":
             return { ...state, accessToken: {token: "", expires: ""}, loggedIn: false }
         case "SET_DEVICES":
-            return { ...state, devices: action.payload }
+            return { ...state, devices: { ...state.devices, list: action.payload} }
+        case "SET_SELECTED_DEVICE":
+            return { ...state, devices: { ...state.devices, selected: action.payload} }
         case "SET_PLAYLISTS":
-            return { ...state, playlists: action.payload }
+            return { ...state, playlists: { ...state.playlists, list: action.payload} }
+        case "SET_SELECTED_PLAYLIST":
+            return { ...state, playlists: { ...state.playlists, selected: action.payload} }
     }
 }
 
