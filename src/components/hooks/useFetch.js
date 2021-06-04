@@ -15,7 +15,7 @@ export function useFetch() {
         
         switch(type) {
             case "play":
-                return play(state, payload.contextUri, payload.deviceId)
+                return play(state, payload)
             case "callback":
                 return callback(payload.code, payload.redirectUri, dispatch, setCookie)
             case "refresh":
@@ -34,21 +34,24 @@ export function useFetch() {
     return f
 }
 
-//Example maybe??
-async function play(state, contextUri, deviceId = "") {
-    return new Promise(res => {
-        fetch("https://paastien.no/gettify/play", {
-            method: "GET",
+async function play(state, playlist) {
+    return new Promise((res, rej) => {
+        console.log("devices_id", state.devices.selected.id)
+        console.log("ac", state.accessToken.token)
+        console.log("context-uri", playlist.uri)
+        fetch("https://paastien.no/gettify/play?device_id=" + state.devices.selected.id, {
+            method: "PUT",
             headers: {
-                "access-token": state.accessToken.token
+                "access-token": state.accessToken.token,
+                "Content-Type": "application/json"
             },
-            body: {
-                "context-uri": contextUri,
-                "device-id": deviceId
-            }
+            body: JSON.stringify({
+                "context-uri": playlist.uri
+            })
         })
         .then(response => response.json())
         .then(data => res(data))
+        .catch(e => rej(e))
     })   
 }
 
