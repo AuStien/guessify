@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie'
 
 import { Context } from '../Store'
 import { useFetch } from './hooks/useFetch'
+import { Devices } from './index'
 import style from './header.module.css'
 
 export default function Header() {
@@ -19,10 +20,26 @@ export default function Header() {
 
     useEffect(() => {
         if(state.accessToken.token !== "") {
+            //Get user
             f("user")
             .then(data => {
                 setUsername(data.display_name)
             })
+
+            //Get devices
+            f("devices")
+            .then(data => {
+                console.log("devices", data)
+                dispatch({type: "SET_DEVICES", payload: data.devices})
+            })
+
+            //Get playlists
+            f("playlists")
+            .then(data => {
+                console.log("playlists", data)
+                dispatch({type: "SET_PLAYLISTS", payload: data})
+            })
+
         }
     }, [state.accessToken.token])
 
@@ -33,9 +50,15 @@ export default function Header() {
     }
 
     return(
-        <React.Fragment>
-            {state.loggedIn ? <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3> : <a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>}
-            <button onClick={() => f("base")}>Base</button>
-        </React.Fragment>
+        <div className={style.container}>
+            {state.loggedIn ? 
+                <React.Fragment>
+                    <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3> 
+                    <Devices />
+                </React.Fragment>
+            : 
+                <a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>
+            }
+        </div>
     )
 }
