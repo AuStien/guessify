@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
+import styled from 'styled-components'
 
 import { Context } from '../../Store'
 import { Playlist } from '../index'
-import style from './playlists.module.css'
 
 export default function Playlists() {
     const [state, dispatch] = useContext(Context)
@@ -14,5 +14,10 @@ export default function Playlists() {
         }
     }, [state.playlists])
 
-    return <div className={style.container}>{playlists}</div>
+    return <Frame>{playlists}</Frame>
 }
+
+const Frame = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;

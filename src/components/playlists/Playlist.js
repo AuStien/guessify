@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
+import styled from 'styled-components'
 
-import style from './playlist.module.css'
 import { useFetch } from '../hooks/useFetch'
 import { Context } from '../../Store'
 
@@ -15,8 +15,24 @@ export default function Playlist({playlist}) {
         }
     }
 
-    return <div className={style.container} onClick={() => handleClick()} >
-        <img className={style.img} src={playlist.images[0].url} alt={playlist.name} />
-        <p className={style.title}>{playlist.name}</p>
-    </div>
+    return <Frame onClick={() => handleClick()} >
+        <ImageFrame src={playlist.images[0].url} alt={playlist.name} />
+        <p>{playlist.name}</p>
+    </Frame>
 }
+
+const Frame = styled.div`
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 4px;
+    padding: 4px;
+    margin: 5px;
+    width: 150px;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const ImageFrame = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+`;

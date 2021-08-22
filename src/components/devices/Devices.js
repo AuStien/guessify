@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Select from 'react-select'
+import styled from 'styled-components'
 
 import { Context } from '../../Store'
-import style from './devices.module.css'
 
 export default function Devices() {
     const [state, dispatch] = useContext(Context)
@@ -30,8 +30,7 @@ export default function Devices() {
         }
     }, [selected])
 
-    return <Select 
-        className={style.select}
+    return <SelectFrame 
         options={options}
         value={selected}
         onChange={setSelected}
@@ -40,3 +39,7 @@ export default function Devices() {
         isSearchable={false}
         />
 }
+
+const SelectFrame = styled(Select)`
+    width: 400px;
+`

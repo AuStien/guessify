@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import styled from 'styled-components'
 
 import { Context } from '../../Store'
 import { useFetch } from '../hooks/useFetch'
 import { Devices } from '../index'
-import style from './header.module.css'
 
 export default function Header() {
     const [state, dispatch] = useContext(Context)
@@ -50,7 +50,7 @@ export default function Header() {
     }
 
     return(
-        <div className={style.container}>
+        <Frame>
             {state.loggedIn ? 
                 <React.Fragment>
                     <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3> 
@@ -59,6 +59,13 @@ export default function Header() {
             : 
                 <a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>
             }
-        </div>
+        </Frame>
     )
 }
+
+const Frame = styled.div`
+    padding: 5px;
+    top: 0;
+    margin-top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`;
