@@ -4,7 +4,7 @@ import Callback from './auth/Callback'
 import Header from './Header'
 import Login from './auth/Login'
 import Refresh from './auth/Refresh'
-import Devices from './Devices'
+import Devices from './devices/Devices'
 import Playlists from './Playlists'
 import Playlist from './Playlist'
 
