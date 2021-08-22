@@ -1,12 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import { Context } from '../../Store'
-import { Devices, Playlists } from '../index'
+import { Playlists } from '../index'
 
 export default function Home() {
     const [state, dispatch] = useContext(Context)
-    
-    
     
     return(
         <React.Fragment>
