@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { Context } from '../Store'
-import { Playlist } from './index'
+import { Context } from '../../Store'
+import { Playlist } from '../index'
 import style from './playlists.module.css'
 
 export default function Playlists() {

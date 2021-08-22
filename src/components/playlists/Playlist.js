@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 
 import style from './playlist.module.css'
-import { useFetch } from './hooks/useFetch'
-import { Context } from '../Store'
+import { useFetch } from '../hooks/useFetch'
+import { Context } from '../../Store'
 
 export default function Playlist({playlist}) {
     const f = useFetch()
