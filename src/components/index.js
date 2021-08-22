@@ -1,5 +1,5 @@
 import App from './app/App'
-import Home from './Home'
+import Home from './home/Home'
 import Callback from './auth/Callback'
 import Header from './header/Header'
 import Login from './auth/Login'
