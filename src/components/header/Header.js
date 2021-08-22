@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { Context } from '../Store'
-import { useFetch } from './hooks/useFetch'
-import { Devices } from './index'
+import { Context } from '../../Store'
+import { useFetch } from '../hooks/useFetch'
+import { Devices } from '../index'
 import style from './header.module.css'
 
 export default function Header() {
