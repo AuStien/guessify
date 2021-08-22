@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import { Home, Callback, Header } from './index'
+import { Home, Callback, Header } from '../index'
 
 import "./app.css"
 
