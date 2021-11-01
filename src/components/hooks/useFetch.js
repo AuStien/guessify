@@ -12,7 +12,7 @@ export function useFetch() {
         if (Date.parse(state.accessToken.expires) - Date.now() <= 10000) {
             await refresh(cookies, setCookie, dispatch)
         }
-        
+
         switch(type) {
             case "play":
                 return play(state, payload)
@@ -52,7 +52,7 @@ async function play(state, playlist) {
         .then(response => response.json())
         .then(data => res(data))
         .catch(e => rej(e))
-    })   
+    })
 }
 
 async function user(state) {

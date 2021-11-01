@@ -51,12 +51,12 @@ export default function Header() {
 
     return(
         <Frame>
-            {state.loggedIn ? 
+            {state.loggedIn ?
                 <React.Fragment>
-                    <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3> 
+                    <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3>
                     <Devices />
                 </React.Fragment>
-            : 
+            :
                 <a href='https://paastien.no/gettify/login?redirect=http://localhost:3000/callback'>Login</a>
             }
         </Frame>
