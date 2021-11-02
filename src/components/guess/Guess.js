@@ -24,7 +24,7 @@ export default function Guess() {
     }, [state.playlists.list])
 
     useEffect(() => {
-        if(state.playlists.selected) {
+        if(state.playlists.selected.name) {
             f("play", state.playlists.selected)
         }
     }, [state.playlists.selected])
