@@ -51,6 +51,9 @@ export default function Header() {
 
     return(
         <Frame>
+            <div>
+                <a href="/" >Home</a>
+            </div>
             {state.loggedIn ?
                 <React.Fragment>
                     <h3>Greetings, {username}! <button onClick={() => logout()}>Logout</button></h3>
