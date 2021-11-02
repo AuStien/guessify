@@ -11,10 +11,10 @@ export default function Guess() {
     const [state, dispatch] = useContext(Context)
 
     useEffect(() => {
-        if(!state.playlists.selected || id != state.playlists.selected.id) {
+        if(!state.playlists.selected || id !== state.playlists.selected.id) {
             if(state.playlists.list) {
                 for(let p of state.playlists.list) {
-                    if (p.id == id) {
+                    if (p.id === id) {
                         dispatch({type: "SET_SELECTED_PLAYLIST", payload: p})
                         break
                     }
