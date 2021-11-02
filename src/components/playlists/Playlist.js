@@ -1,18 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-
-import { useFetch } from '../hooks/useFetch'
-import { Context } from '../../Store'
+import { useHistory } from 'react-router'
 
 export default function Playlist({playlist}) {
-    const f = useFetch()
-    const [state, dispatch] = useContext(Context)
+    const history = useHistory()
 
     function handleClick() {
-        dispatch({type: "SET_SELECTED_PLAYLIST", payload: playlist})
-        if (state.devices.selected.id) {
-            f("play", playlist)
-        }
+        history.push("/guess/playlist/" + playlist.id)
     }
 
     return <Frame onClick={() => handleClick()} >
