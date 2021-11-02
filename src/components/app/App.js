@@ -18,7 +18,7 @@ function App() {
             <Callback/>
           </Route>
 
-          <Route path="/guess">
+          <Route path="/guess/playlist/:id">
             <Guess />
           </Route>
       </Router>
