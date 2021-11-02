@@ -8,5 +8,6 @@ import Devices from './devices/Devices'
 import Playlists from './playlists/Playlists'
 import Playlist from './playlists/Playlist'
 import Guess from './guess/Guess'
+import Alternative from './guess/Alternative'
 
-export {App, Home, Callback, Header, Login, Refresh, Devices, Playlists, Playlist, Guess}
+export {App, Home, Callback, Header, Login, Refresh, Devices, Playlists, Playlist, Guess, Alternative}
