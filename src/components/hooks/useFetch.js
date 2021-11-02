@@ -36,9 +36,13 @@ export function useFetch() {
 
 async function play(state, playlist) {
     return new Promise((res, rej) => {
+        if(!state.devices.selected.id || !state.accessToken.token) {
+            return rej("Missing device or accessToken")
+        }
         console.log("devices_id", state.devices.selected.id)
         console.log("ac", state.accessToken.token)
         console.log("context-uri", playlist.uri)
+        console.log("playlist", playlist)
         fetch("https://paastien.no/gettify/play?device_id=" + state.devices.selected.id, {
             method: "PUT",
             headers: {
