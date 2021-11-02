@@ -27,6 +27,9 @@ export function Reducer(state, action) {
             return { ...state, playlists: { ...state.playlists, list: action.payload} }
         case "SET_SELECTED_PLAYLIST":
             return { ...state, playlists: { ...state.playlists, selected: action.payload} }
+        default:
+            console.log("Unknown action type")
+            return state
     }
 }
 

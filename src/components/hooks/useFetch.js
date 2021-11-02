@@ -28,6 +28,9 @@ export function useFetch() {
                 return devices(state)
             case "base":
                 return base(state)
+            default:
+                console.log("Unknown type")
+                return
         }
     }
 
